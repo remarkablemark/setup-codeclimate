@@ -22,6 +22,19 @@ steps:
   - uses: remarkablemark/setup-codeclimate@v1
 ```
 
+**Example:**
+
+```yaml
+steps:
+  - uses: remarkablemark/setup-codeclimate@v1
+  - run: |
+      cc-test-reporter before-build
+      npm test
+      cc-test-reporter after-build --exit-code $?
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+```
+
 ## Inputs
 
 ### `codeclimate-version`
