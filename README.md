@@ -39,7 +39,7 @@ steps:
 
 ### `codeclimate-version`
 
-**Optional**: The Code Climate test reporter [version](https://github.com/codeclimate/test-reporter/releases). Defaults to `latest`):
+**Optional**: The Code Climate test reporter [version](https://github.com/codeclimate/test-reporter/releases). Defaults to `latest`:
 
 ```yaml
 - uses: remarkablemark/setup-codeclimate@v1
