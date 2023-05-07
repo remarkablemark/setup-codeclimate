@@ -1,28 +1,30 @@
+import { getExecOutput } from '@actions/exec';
 import os from 'os';
 import path from 'path';
+import semver from 'semver';
+
+import { BINARY_NAME } from './constants';
 
 const architecture = {
-  arm: 'arm',
-  x32: '386',
+  arm64: 'arm64',
   x64: 'amd64',
 } as const;
-
-type Arch = keyof typeof architecture;
 
 /**
  * Gets the operating system CPU architecture.
  *
  * @see {@link https://nodejs.org/api/os.html#os_os_arch}
  *
- * @param arch - Arch in [arm, x32, x64...]
- * @returns - Return value in [amd64, 386, arm]
+ * @param arch - Arch in [arm64, x64...]
+ * @returns - Return value in [amd64, amd64]
  */
-function getArch(arch: Arch) {
-  return architecture[arch] || arch;
+function getArch(arch: NodeJS.Architecture) {
+  return architecture[arch as keyof typeof architecture] || architecture.x64;
 }
 
 const platform = {
-  darwin: 'macOS',
+  darwin: 'darwin',
+  linux: 'linux',
   win32: 'windows',
 } as const;
 
@@ -35,26 +37,47 @@ const platform = {
  * @returns - Return value in [darwin, linux, windows]
  */
 function getOS(os: NodeJS.Platform) {
-  return platform[os as keyof typeof platform] || os;
+  return platform[os as keyof typeof platform];
 }
 
 /**
  * Gets download object.
  *
- * @see {@link https://github.com/cli/cli/releases}
+ * @see {@link https://docs.codeclimate.com/docs/configuring-test-coverage#section-locations-of-pre-built-binaries}
  *
  * @param version - CLI version
  * @returns - URL and binary path
  */
 export function getDownloadObject(version: string) {
   const platform = os.platform();
-  const arch = os.arch() as Arch;
+  const arch = os.arch() as NodeJS.Architecture;
 
-  const filename = `gh_${version}_${getOS(platform)}_${getArch(arch)}`;
-  const extension = platform === 'win32' ? 'zip' : 'tar.gz';
+  // https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+  const binPath = process.env.RUNNER_TEMP || os.tmpdir();
 
   return {
-    binPath: platform === 'win32' ? 'bin' : path.join(filename, 'bin'),
-    url: `https://github.com/cli/cli/releases/download/v${version}/${filename}.${extension}`,
+    binPath,
+    // join instead of resolve or else path will be broken on windows
+    dest: path.join(
+      binPath,
+      BINARY_NAME + (platform === 'win32' ? '.exe' : '')
+    ),
+    url: `https://codeclimate.com/downloads/test-reporter/test-reporter-${version}-${getOS(
+      platform
+    )}-${getArch(arch)}`,
   };
+}
+
+/**
+ * Gets the Code Climate test reporter version.
+ *
+ * @param binaryPath - Binary path
+ * @returns - Semver (Linux/Windows) or hash (Mac)
+ */
+export async function getVersion(binaryPath: string): Promise<string> {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return (await getExecOutput(binaryPath, ['--version'])).stdout
+    .replace('(', '')
+    .split(' ')
+    .find((text) => semver.valid(text) || /^[0-9a-f]{32,}$/.test(text))!;
 }

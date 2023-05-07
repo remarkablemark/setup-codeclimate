@@ -1,64 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`when OS is "darwin" and arch is "arm" gets download object 1`] = `
+exports[`getDownloadObject when OS is "darwin" and arch is "arm" gets download object 1`] = `
 {
-  "binPath": "gh_2.27.0_macOS_arm/bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_macOS_arm.tar.gz",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-darwin-amd64",
 }
 `;
 
-exports[`when OS is "darwin" and arch is "x32" gets download object 1`] = `
+exports[`getDownloadObject when OS is "darwin" and arch is "arm64" gets download object 1`] = `
 {
-  "binPath": "gh_2.27.0_macOS_386/bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_macOS_386.tar.gz",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-darwin-arm64",
 }
 `;
 
-exports[`when OS is "darwin" and arch is "x64" gets download object 1`] = `
+exports[`getDownloadObject when OS is "darwin" and arch is "x32" gets download object 1`] = `
 {
-  "binPath": "gh_2.27.0_macOS_amd64/bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_macOS_amd64.tar.gz",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-darwin-amd64",
 }
 `;
 
-exports[`when OS is "linux" and arch is "arm" gets download object 1`] = `
+exports[`getDownloadObject when OS is "darwin" and arch is "x64" gets download object 1`] = `
 {
-  "binPath": "gh_2.27.0_linux_arm/bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_linux_arm.tar.gz",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-darwin-amd64",
 }
 `;
 
-exports[`when OS is "linux" and arch is "x32" gets download object 1`] = `
+exports[`getDownloadObject when OS is "linux" and arch is "arm" gets download object 1`] = `
 {
-  "binPath": "gh_2.27.0_linux_386/bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_linux_386.tar.gz",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-linux-amd64",
 }
 `;
 
-exports[`when OS is "linux" and arch is "x64" gets download object 1`] = `
+exports[`getDownloadObject when OS is "linux" and arch is "arm64" gets download object 1`] = `
 {
-  "binPath": "gh_2.27.0_linux_amd64/bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_linux_amd64.tar.gz",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-linux-arm64",
 }
 `;
 
-exports[`when OS is "win32" and arch is "arm" gets download object 1`] = `
+exports[`getDownloadObject when OS is "linux" and arch is "x32" gets download object 1`] = `
 {
-  "binPath": "bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_windows_arm.zip",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-linux-amd64",
 }
 `;
 
-exports[`when OS is "win32" and arch is "x32" gets download object 1`] = `
+exports[`getDownloadObject when OS is "linux" and arch is "x64" gets download object 1`] = `
 {
-  "binPath": "bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_windows_386.zip",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-linux-amd64",
 }
 `;
 
-exports[`when OS is "win32" and arch is "x64" gets download object 1`] = `
+exports[`getDownloadObject when OS is "win32" and arch is "arm" gets download object 1`] = `
 {
-  "binPath": "bin",
-  "url": "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_windows_amd64.zip",
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter.exe",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-windows-amd64",
+}
+`;
+
+exports[`getDownloadObject when OS is "win32" and arch is "arm64" gets download object 1`] = `
+{
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter.exe",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-windows-arm64",
+}
+`;
+
+exports[`getDownloadObject when OS is "win32" and arch is "x32" gets download object 1`] = `
+{
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter.exe",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-windows-amd64",
+}
+`;
+
+exports[`getDownloadObject when OS is "win32" and arch is "x64" gets download object 1`] = `
+{
+  "binPath": "/var/folders/1/tmp/T",
+  "dest": "/var/folders/1/tmp/T/cc-test-reporter.exe",
+  "url": "https://codeclimate.com/downloads/test-reporter/test-reporter-0.11.1-windows-amd64",
 }
 `;

@@ -1,11 +1,14 @@
-name: github-actions-setup-cli-template
-description: GitHub Actions setup CLI template
+name: setup-codeclimate
+description: Set up your GitHub Actions workflow with Code Climate test reporter
 author: remarkablemark
 inputs:
-  cli-version:
-    description: CLI version
+  codeclimate-version:
+    description: Code Climate test reporter version
     required: false
-    default: 2.27.0
+    default: latest
 runs:
   using: node16
   main: dist/index.js
+branding:
+  icon: chevrons-up
+  color: gray-dark

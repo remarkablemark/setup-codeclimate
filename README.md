@@ -1,8 +1,13 @@
-# github-actions-setup-cli-template
+![Code Climate](https://github.com/codeclimate.png?s=200)
 
-[![build](https://github.com/remarkablemark/github-actions-setup-cli-template/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/github-actions-setup-cli-template/actions/workflows/build.yml)
+# setup-codeclimate
 
-GitHub Actions setup CLI template. Inspired by [github-developer/example-setup-gh](https://github.com/github-developer/example-setup-gh). Template from [remarkablemark/github-actions-typescript-template](https://github.com/remarkablemark/github-actions-typescript-template).
+[![version](https://badgen.net/github/release/remarkablemark/setup-codeclimate)](https://github.com/remarkablemark/setup-codeclimate/releases)
+[![build](https://github.com/remarkablemark/setup-codeclimate/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/setup-codeclimate/actions/workflows/build.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/41506f89fd7e38398c84/maintainability)](https://codeclimate.com/github/remarkablemark/setup-codeclimate/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/41506f89fd7e38398c84/test_coverage)](https://codeclimate.com/github/remarkablemark/setup-codeclimate/test_coverage)
+
+⚙️ Set up your GitHub Actions workflow with [Code Climate test reporter](https://github.com/codeclimate/test-reporter).
 
 ## Usage
 
@@ -12,19 +17,19 @@ See [action.yml](action.yml)
 
 ```yaml
 steps:
-  - uses: remarkablemark/github-actions-setup-cli-template@v1
+  - uses: remarkablemark/setup-codeclimate@v1
 ```
 
 ## Inputs
 
-### `cli-version`
+### `codeclimate-version`
 
-**Optional**: The CLI [version](https://github.com/cli/cli/releases). Defaults to [`2.27.0`](https://github.com/cli/cli/releases/tag/v2.27.0):
+**Optional**: The Code Climate test reporter [version](https://github.com/codeclimate/test-reporter/releases). Defaults to `latest`):
 
 ```yaml
-- uses: remarkablemark/github-actions-setup-cli-template@v1
+- uses: remarkablemark/setup-codeclimate@v1
   with:
-    cli-version: 2.27.0
+    codeclimate-version: 0.11.1
 ```
 
 ## Contributions

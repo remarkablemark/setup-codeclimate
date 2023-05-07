@@ -1,24 +1,32 @@
 import { addPath, getInput, setFailed } from '@actions/core';
-import { downloadTool, extractTar, extractZip } from '@actions/tool-cache';
-import path from 'path';
+import { exec } from '@actions/exec';
+import { cacheFile, downloadTool } from '@actions/tool-cache';
 
-import { getDownloadObject } from './utils';
+import { BINARY_NAME } from './constants';
+import { getDownloadObject, getVersion } from './utils';
 
 export async function run() {
   try {
     // Get version of tool to be installed
-    const version = getInput('cli-version');
+    const version = getInput('codeclimate-version');
 
-    // Download the specific version of the tool, e.g. as a tarball/zipball
+    // Download the specific version of the tool
     const download = getDownloadObject(version);
-    const pathToTarball = await downloadTool(download.url);
+    const pathToCLI = await downloadTool(download.url, download.dest);
 
-    // Extract the tarball/zipball onto host runner
-    const extract = download.url.endsWith('.zip') ? extractZip : extractTar;
-    const pathToCLI = await extract(pathToTarball);
+    // Make binary executable
+    await exec('chmod', ['+x', pathToCLI]);
+
+    // Cache tool
+    await cacheFile(
+      pathToCLI,
+      BINARY_NAME,
+      BINARY_NAME,
+      await getVersion(pathToCLI)
+    );
 
     // Expose the tool by adding it to the PATH
-    addPath(path.join(pathToCLI, download.binPath));
+    addPath(download.binPath);
   } catch (error) {
     if (error instanceof Error) {
       setFailed(error.message);

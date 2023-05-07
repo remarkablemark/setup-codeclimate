@@ -27,14 +27,16 @@ jobs:
       - name: Check type
         run: npm run lint:tsc
 
-      - name: Run tests
-        run: npm run test:ci
-
-      - name: Codecov
-        uses: codecov/codecov-action@v3
-
       - name: Run action
         uses: ./
+
+      - name: Run tests
+        run: |
+          cc-test-reporter before-build
+          npm run test:ci
+          cc-test-reporter after-build --exit-code $?
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
       - name: Build artifact
         run: npm run build
@@ -52,7 +54,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        version: [1.14.0, 2.27.0]
+        version: [latest, 0.11.1]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
@@ -61,19 +63,19 @@ jobs:
       - name: Run action
         uses: ./
         with:
-          cli-version: ${{ matrix.version }}
+          codeclimate-version: ${{ matrix.version }}
 
       - name: Get binary
-        run: command -v gh
+        run: command -v cc-test-reporter
 
       - name: Check version
-        if: matrix.os != 'windows-latest'
+        if: matrix.os != 'windows-latest' && matrix.version != 'latest'
         run: |
-          if [[ $(gh --version) != *'${{ matrix.version }}'* ]]; then
+          if [[ $(cc-test-reporter --version) != *'${{ matrix.version }}'* ]]; then
             echo 'Version does not match. See version below:'
-            gh --version
+            cc-test-reporter --version
             exit 1
           fi
 
       - name: Show help
-        run: gh --help
+        run: cc-test-reporter --help
