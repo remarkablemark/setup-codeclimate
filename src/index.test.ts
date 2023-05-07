@@ -3,7 +3,7 @@ import * as exec from '@actions/exec';
 import * as tc from '@actions/tool-cache';
 
 import { run } from '.';
-import { BINARY_NAME } from './constants';
+import { CLI_NAME, VERSION } from './constants';
 import * as utils from './utils';
 
 jest.mock('@actions/core');
@@ -20,33 +20,42 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
-describe('action', () => {
-  const download = {
-    binPath: '/binPath',
-    dest: '/binPath/cc-test-reporter',
-    url: 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-arm64',
-  };
+const download = {
+  binPath: '/binPath',
+  dest: '/binPath/cc-test-reporter',
+  url: 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-arm64',
+};
 
+describe('action', () => {
   it('downloads and adds CLI to PATH', async () => {
-    const version = '0.11.1';
+    const version = '1.2.3';
+    const name = 'cli-name';
     const pathToDownloadDirectory = 'path/to';
     const pathToDownload = `${pathToDownloadDirectory}/download`;
 
-    mockedCore.getInput.mockImplementationOnce((name) =>
-      name === 'codeclimate-version' ? 'latest' : ''
-    );
+    mockedCore.getInput.mockImplementation((name) => {
+      switch (name) {
+        case 'codeclimate-version':
+          return version;
+        case 'cli-name':
+          return name;
+        default:
+          return '';
+      }
+    });
     mockedUtils.getDownloadObject.mockReturnValueOnce(download);
     mockedTc.downloadTool.mockResolvedValueOnce(pathToDownload);
     mockedUtils.getVersion.mockResolvedValueOnce(version);
 
     await run();
 
+    expect(mockedUtils.getDownloadObject).toBeCalledWith(version, name);
     expect(mockedTc.downloadTool).toBeCalledWith(download.url, download.dest);
     expect(mockedExec.exec).toBeCalledWith('chmod', ['+x', pathToDownload]);
     expect(mockedTc.cacheFile).toBeCalledWith(
       pathToDownload,
-      BINARY_NAME,
-      BINARY_NAME,
+      name,
+      name,
       version
     );
     expect(mockedCore.addPath).toBeCalledWith(download.binPath);
@@ -55,11 +64,13 @@ describe('action', () => {
 
 describe('error', () => {
   it('throws error', async () => {
+    mockedUtils.getDownloadObject.mockReturnValueOnce(download);
     const message = 'error';
-    mockedCore.getInput.mockImplementationOnce(() => {
+    mockedTc.downloadTool.mockImplementationOnce(() => {
       throw new Error(message);
     });
     await run();
+    expect(mockedUtils.getDownloadObject).toBeCalledWith(VERSION, CLI_NAME);
     expect(mockedCore.setFailed).toBeCalledWith(message);
   });
 });
