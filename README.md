@@ -1,4 +1,6 @@
-![Code Climate](https://github.com/codeclimate.png?s=200)
+<p align="center">
+  <img src="https://github.com/codeclimate.png?size=200" alt="Code Climate">
+</p>
 
 # setup-codeclimate
 
