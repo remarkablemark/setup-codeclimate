@@ -1,6 +1,6 @@
 {
   "name": "setup-codeclimate",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0",
   "description": "Set up your GitHub Actions workflow with Code Climate test reporter",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "src/index.ts",
