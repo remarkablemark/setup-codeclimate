@@ -1,58 +1,65 @@
 import * as core from '@actions/core';
+import * as exec from '@actions/exec';
 import * as tc from '@actions/tool-cache';
-import os from 'os';
 
 import { run } from '.';
+import { BINARY_NAME } from './constants';
+import * as utils from './utils';
 
 jest.mock('@actions/core');
+jest.mock('@actions/exec');
 jest.mock('@actions/tool-cache');
-jest.mock('os');
+jest.mock('./utils');
 
 const mockedCore = jest.mocked(core);
+const mockedExec = jest.mocked(exec);
 const mockedTc = jest.mocked(tc);
-const mockedOs = jest.mocked(os);
+const mockedUtils = jest.mocked(utils);
 
 beforeEach(() => {
   jest.resetAllMocks();
 });
 
-describe.each(['darwin', 'win32', 'linux'])('when OS is %p', (os) => {
-  beforeEach(() => {
-    mockedOs.platform.mockReturnValueOnce(os as NodeJS.Platform);
-    mockedOs.arch.mockReturnValueOnce('arm64');
-  });
+describe('action', () => {
+  const download = {
+    binPath: '/binPath',
+    dest: '/binPath/cc-test-reporter',
+    url: 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-arm64',
+  };
 
-  it('downloads, extracts, and exposes CLI in PATH', async () => {
-    const version = '2.27.0';
-    const pathToTarball = 'path/to/tarball';
-    const pathToCLI = 'path/to/cli';
+  it('downloads and adds CLI to PATH', async () => {
+    const version = '0.11.1';
+    const pathToDownloadDirectory = 'path/to';
+    const pathToDownload = `${pathToDownloadDirectory}/download`;
 
     mockedCore.getInput.mockImplementationOnce((name) =>
-      name === 'cli-version' ? version : ''
+      name === 'codeclimate-version' ? 'latest' : ''
     );
-    mockedTc.downloadTool.mockResolvedValueOnce(pathToTarball);
-    const extract = os === 'win32' ? mockedTc.extractZip : mockedTc.extractTar;
-    extract.mockResolvedValueOnce(pathToCLI);
+    mockedUtils.getDownloadObject.mockReturnValueOnce(download);
+    mockedTc.downloadTool.mockResolvedValueOnce(pathToDownload);
+    mockedUtils.getVersion.mockResolvedValueOnce(version);
 
     await run();
 
-    expect(mockedTc.downloadTool).toBeCalledWith(
-      expect.stringContaining(
-        `https://github.com/cli/cli/releases/download/v${version}/gh_${version}_`
-      )
+    expect(mockedTc.downloadTool).toBeCalledWith(download.url, download.dest);
+    expect(mockedExec.exec).toBeCalledWith('chmod', ['+x', pathToDownload]);
+    expect(mockedTc.cacheFile).toBeCalledWith(
+      pathToDownload,
+      BINARY_NAME,
+      BINARY_NAME,
+      version
     );
-    expect(extract).toBeCalledWith(pathToTarball);
-    expect(mockedCore.addPath).toBeCalledWith(
-      expect.stringContaining(pathToCLI)
-    );
+    expect(mockedCore.addPath).toBeCalledWith(download.binPath);
   });
 });
 
-it('catches error', async () => {
-  const message = 'error';
-  mockedCore.getInput.mockImplementationOnce(() => {
-    throw new Error(message);
+describe('error', () => {
+  it('throws error', async () => {
+    const message = 'error';
+    mockedCore.getInput.mockImplementationOnce(() => {
+      throw new Error(message);
+    });
+    await run();
+    expect(mockedCore.setFailed).toBeCalledWith(message);
   });
-  await run();
-  expect(mockedCore.setFailed).toBeCalledWith(message);
 });
