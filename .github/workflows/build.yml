@@ -64,18 +64,19 @@ jobs:
         uses: ./
         with:
           codeclimate-version: ${{ matrix.version }}
+          cli-name: codeclimate
 
       - name: Get binary
-        run: command -v cc-test-reporter
+        run: command -v codeclimate
 
       - name: Check version
         if: matrix.os != 'windows-latest' && matrix.version != 'latest'
         run: |
-          if [[ $(cc-test-reporter --version) != *'${{ matrix.version }}'* ]]; then
+          if [[ $(codeclimate --version) != *'${{ matrix.version }}'* ]]; then
             echo 'Version does not match. See version below:'
-            cc-test-reporter --version
+            codeclimate --version
             exit 1
           fi
 
       - name: Show help
-        run: cc-test-reporter --help
+        run: codeclimate --help

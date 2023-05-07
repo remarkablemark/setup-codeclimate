@@ -47,6 +47,16 @@ steps:
     codeclimate-version: 0.11.1
 ```
 
+### `cli-name`
+
+**Optional**: The Code Climate test reporter CLI name. Defaults to `cc-test-reporter`):
+
+```yaml
+- uses: remarkablemark/setup-codeclimate@v1
+  with:
+    cli-name: cc-test-reporter
+```
+
 ## Contributions
 
 Contributions are welcome!

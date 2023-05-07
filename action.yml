@@ -6,6 +6,10 @@ inputs:
     description: Code Climate test reporter version
     required: false
     default: latest
+  cli-name:
+    description: Code Climate test reporter CLI name
+    required: false
+    default: cc-test-reporter
 runs:
   using: node16
   main: dist/index.js

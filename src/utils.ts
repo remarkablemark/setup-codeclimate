@@ -3,8 +3,6 @@ import os from 'os';
 import path from 'path';
 import semver from 'semver';
 
-import { BINARY_NAME } from './constants';
-
 const architecture = {
   arm64: 'arm64',
   x64: 'amd64',
@@ -46,9 +44,10 @@ function getOS(os: NodeJS.Platform) {
  * @see {@link https://docs.codeclimate.com/docs/configuring-test-coverage#section-locations-of-pre-built-binaries}
  *
  * @param version - CLI version
- * @returns - URL and binary path
+ * @param name - CLI name
+ * @returns - URL, download destination, and binary path
  */
-export function getDownloadObject(version: string) {
+export function getDownloadObject(version: string, name: string) {
   const platform = os.platform();
   const arch = os.arch() as NodeJS.Architecture;
 
@@ -58,10 +57,7 @@ export function getDownloadObject(version: string) {
   return {
     binPath,
     // join instead of resolve or else path will be broken on windows
-    dest: path.join(
-      binPath,
-      BINARY_NAME + (platform === 'win32' ? '.exe' : '')
-    ),
+    dest: path.join(binPath, name + (platform === 'win32' ? '.exe' : '')),
     url: `https://codeclimate.com/downloads/test-reporter/test-reporter-${version}-${getOS(
       platform
     )}-${getArch(arch)}`,

@@ -1,6 +1,7 @@
 import * as exec from '@actions/exec';
 import os from 'os';
 
+import { CLI_NAME, VERSION } from './constants';
 import { getDownloadObject, getVersion } from './utils';
 
 jest.mock('@actions/exec');
@@ -44,7 +45,7 @@ describe('getDownloadObject', () => {
     });
 
     it('gets download object', () => {
-      expect(getDownloadObject(version)).toMatchSnapshot();
+      expect(getDownloadObject(version, CLI_NAME)).toMatchSnapshot();
     });
   });
 
@@ -62,7 +63,7 @@ describe('getDownloadObject', () => {
     it('gets download object', () => {
       mockedOs.platform.mockReturnValueOnce('linux');
       mockedOs.arch.mockReturnValueOnce('arm64');
-      expect(getDownloadObject('latest')).toMatchInlineSnapshot(`
+      expect(getDownloadObject(VERSION, CLI_NAME)).toMatchInlineSnapshot(`
       {
         "binPath": "/home/runner/work/_temp",
         "dest": "/home/runner/work/_temp/cc-test-reporter",
