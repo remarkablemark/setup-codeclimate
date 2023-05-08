@@ -9,7 +9,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/41506f89fd7e38398c84/maintainability)](https://codeclimate.com/github/remarkablemark/setup-codeclimate/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/41506f89fd7e38398c84/test_coverage)](https://codeclimate.com/github/remarkablemark/setup-codeclimate/test_coverage)
 
-⚙️ Set up your GitHub Actions workflow with [Code Climate test reporter](https://github.com/codeclimate/test-reporter).
+⚙️ Set up your GitHub Actions workflow with [Code Climate test reporter](https://github.com/codeclimate/test-reporter). See [examples](#examples).
 
 ## Usage
 
@@ -56,6 +56,10 @@ steps:
   with:
     cli-name: cc-test-reporter
 ```
+
+## Examples
+
+- [remarkablemark/codeclimate-github-actions-examples](https://github.com/remarkablemark/codeclimate-github-actions-examples)
 
 ## Contributions
 
