@@ -11,6 +11,11 @@
 
 ⚙️ Set up your GitHub Actions workflow with [Code Climate test reporter](https://github.com/codeclimate/test-reporter). See [examples](#examples).
 
+```yaml
+- name: Setup Code Climate
+  uses: remarkablemark/setup-codeclimate@v1
+```
+
 ## Usage
 
 See [action.yml](action.yml)
