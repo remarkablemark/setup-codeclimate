@@ -11,9 +11,19 @@
 
 ⚙️ Set up your GitHub Actions workflow with [Code Climate test reporter](https://github.com/codeclimate/test-reporter). See [examples](#examples).
 
+## Quick Start
+
 ```yaml
 - name: Setup Code Climate
   uses: remarkablemark/setup-codeclimate@v1
+
+- name: Run Test and Upload Coverage
+  run: |
+    cc-test-reporter before-build
+    # insert your test command here
+    cc-test-reporter after-build --exit-code $?
+  env:
+    CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 ```
 
 ## Usage
