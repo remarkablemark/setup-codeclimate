@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/remarkablemark/setup-codeclimate/compare/v1.1.0...v1.1.1) (2023-06-27)
+
+
+### Build System
+
+* **package:** bump semver from 7.5.1 to 7.5.3 ([592c7c7](https://github.com/remarkablemark/setup-codeclimate/commit/592c7c780c876cc94c5456a455cce78936b1b8a5)), closes [#41](https://github.com/remarkablemark/setup-codeclimate/issues/41)
+
 ## [1.1.0](https://github.com/remarkablemark/setup-codeclimate/compare/v1.0.0...v1.1.0) (2023-05-07)
 
 
