@@ -59,7 +59,7 @@ export function getDownloadObject(version: string, name: string) {
     // join instead of resolve or else path will be broken on windows
     dest: path.join(binPath, name + (platform === 'win32' ? '.exe' : '')),
     url: `https://codeclimate.com/downloads/test-reporter/test-reporter-${version}-${getOS(
-      platform
+      platform,
     )}-${getArch(arch)}`,
   };
 }

@@ -56,7 +56,7 @@ describe('action', () => {
       pathToDownload,
       name,
       name,
-      version
+      version,
     );
     expect(mockedCore.addPath).toBeCalledWith(download.binPath);
   });
