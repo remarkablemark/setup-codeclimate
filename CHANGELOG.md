@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/remarkablemark/setup-codeclimate/compare/v1.1.2...v2.0.0) (2023-09-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update default runtime to node20
+
+### Features
+
+* change default runtime from node16 to node20 ([6c74cc0](https://github.com/remarkablemark/setup-codeclimate/commit/6c74cc0b62575f0b2451c6b901ce8afb4f8dd246))
+
 ## [1.1.2](https://github.com/remarkablemark/setup-codeclimate/compare/v1.1.1...v1.1.2) (2023-07-11)
 
 
