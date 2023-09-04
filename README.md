@@ -15,7 +15,7 @@
 
 ```yaml
 - name: Setup Code Climate
-  uses: remarkablemark/setup-codeclimate@v1
+  uses: remarkablemark/setup-codeclimate@v2
 
 - name: Run Test and Upload Coverage
   run: |
@@ -34,14 +34,14 @@ See [action.yml](action.yml)
 
 ```yaml
 steps:
-  - uses: remarkablemark/setup-codeclimate@v1
+  - uses: remarkablemark/setup-codeclimate@v2
 ```
 
 **Example:**
 
 ```yaml
 steps:
-  - uses: remarkablemark/setup-codeclimate@v1
+  - uses: remarkablemark/setup-codeclimate@v2
   - run: |
       cc-test-reporter before-build
       npm test
@@ -57,7 +57,7 @@ steps:
 **Optional**: The Code Climate test reporter [version](https://github.com/codeclimate/test-reporter/releases). Defaults to `latest`:
 
 ```yaml
-- uses: remarkablemark/setup-codeclimate@v1
+- uses: remarkablemark/setup-codeclimate@v2
   with:
     codeclimate-version: 0.11.1
 ```
@@ -67,7 +67,7 @@ steps:
 **Optional**: The Code Climate test reporter CLI name. Defaults to `cc-test-reporter`):
 
 ```yaml
-- uses: remarkablemark/setup-codeclimate@v1
+- uses: remarkablemark/setup-codeclimate@v2
   with:
     cli-name: cc-test-reporter
 ```
