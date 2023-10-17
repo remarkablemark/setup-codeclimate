@@ -33,21 +33,19 @@ See [action.yml](action.yml)
 **Basic:**
 
 ```yaml
-steps:
-  - uses: remarkablemark/setup-codeclimate@v2
+- uses: remarkablemark/setup-codeclimate@v2
 ```
 
 **Example:**
 
 ```yaml
-steps:
-  - uses: remarkablemark/setup-codeclimate@v2
-  - run: |
-      cc-test-reporter before-build
-      npm test
-      cc-test-reporter after-build --exit-code $?
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+- uses: remarkablemark/setup-codeclimate@v2
+- run: |
+    cc-test-reporter before-build
+    npm test
+    cc-test-reporter after-build --exit-code $?
+  env:
+    CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 ```
 
 ## Inputs
