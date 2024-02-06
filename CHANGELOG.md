@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.2...v2.0.3) (2024-02-06)
+
+
+### Build System
+
+* **deps:** bump semver from 7.5.4 to 7.6.0 ([#264](https://github.com/remarkablemark/setup-codeclimate/issues/264)) ([b6087d4](https://github.com/remarkablemark/setup-codeclimate/commit/b6087d4ea1c7dac0b21b464d58a200a5d669c2be))
+
 ## [2.0.2](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.1...v2.0.2) (2023-09-12)
 
 
