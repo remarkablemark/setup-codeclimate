@@ -11,7 +11,7 @@
     "lint": "eslint --ignore-path .gitignore --ignore-path .prettierignore --ext .js,.ts,.tsx .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --noEmit",
-    "postinstall": "husky install",
+    "prepare": "husky",
     "test": "jest",
     "test:ci": "CI=true jest --ci --colors --coverage",
     "test:watch": "jest --watch"
