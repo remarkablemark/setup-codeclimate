@@ -76,7 +76,7 @@ jobs:
           codeclimate-version: ${{ matrix.version }}
           cli-name: codeclimate
 
-      - name: Get binary
+      - name: Locate binary
         run: command -v codeclimate
 
       - name: Check version
