@@ -14,16 +14,22 @@
 ## Quick Start
 
 ```yaml
-- name: Setup Code Climate
-  uses: remarkablemark/setup-codeclimate@v2
+name: test
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Code Climate
+        uses: remarkablemark/setup-codeclimate@v2
 
-- name: Run Test and Upload Coverage
-  run: |
-    cc-test-reporter before-build
-    # insert your test command here
-    cc-test-reporter after-build --exit-code $?
-  env:
-    CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Run Test and Upload Coverage
+        run: |
+          cc-test-reporter before-build
+          # insert your test command here
+          cc-test-reporter after-build --exit-code $?
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 ```
 
 ## Usage
