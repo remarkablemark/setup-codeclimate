@@ -62,7 +62,7 @@ See [action.yml](action.yml)
 
 ### `cli-name`
 
-**Optional**: The Code Climate test reporter CLI name. Defaults to `cc-test-reporter`):
+**Optional**: The Code Climate test reporter CLI name. Defaults to `cc-test-reporter`:
 
 ```yaml
 - uses: remarkablemark/setup-codeclimate@v2
