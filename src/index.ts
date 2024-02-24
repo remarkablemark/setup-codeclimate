@@ -7,19 +7,19 @@ import { getDownloadObject, getVersion } from './utils';
 
 export async function run() {
   try {
-    // Get version of tool to be installed
+    // Get the version of the tool to be installed
     const version = getInput('codeclimate-version') || VERSION;
     const name = getInput('cli-name') || CLI_NAME;
 
     // Download the specific version of the tool
     const download = getDownloadObject(version, name);
-    const pathToCLI = await downloadTool(download.url, download.dest);
+    const binaryPath = await downloadTool(download.url, download.dest);
 
-    // Make binary executable
-    await exec('chmod', ['+x', pathToCLI]);
+    // Make the binary executable
+    await exec('chmod', ['+x', binaryPath]);
 
-    // Cache tool
-    await cacheFile(pathToCLI, name, name, await getVersion(pathToCLI));
+    // Cache the tool
+    await cacheFile(binaryPath, name, name, await getVersion(binaryPath));
 
     // Expose the tool by adding it to the PATH
     addPath(download.binPath);
