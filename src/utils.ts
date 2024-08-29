@@ -71,7 +71,6 @@ export function getDownloadObject(version: string, name: string) {
  * @returns - Semver (Linux/Windows) or hash (Mac)
  */
 export async function getVersion(binaryPath: string): Promise<string> {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return (await getExecOutput(binaryPath, ['--version'])).stdout
     .replace('(', '')
     .split(' ')
