@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.7](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.6...v2.0.7) (2024-09-24)
+
+
+### Build System
+
+* **deps-dev:** bump @vercel/ncc from 0.38.1 to 0.38.2 ([#422](https://github.com/remarkablemark/setup-codeclimate/issues/422)) ([79a3a29](https://github.com/remarkablemark/setup-codeclimate/commit/79a3a29b76f3710709d5d5ab8228353dbfd4dd1c))
+
 ## [2.0.6](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.5...v2.0.6) (2024-07-17)
 
 
