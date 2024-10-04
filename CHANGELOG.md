@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.8](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.7...v2.0.8) (2024-10-04)
+
+
+### Build System
+
+* **deps:** bump @actions/core from 1.10.1 to 1.11.0 ([#432](https://github.com/remarkablemark/setup-codeclimate/issues/432)) ([00a60ca](https://github.com/remarkablemark/setup-codeclimate/commit/00a60ca93aa837ce4ff27ae70e5f27ac1a06717b))
+
 ## [2.0.7](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.6...v2.0.7) (2024-09-24)
 
 
