@@ -24,6 +24,9 @@ jobs:
       - name: Check type
         run: npm run lint:tsc
 
+      - name: Setup Code Climate
+        uses: ./
+
       - name: Run tests
         run: |
           cc-test-reporter before-build
@@ -45,9 +48,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run action
-        uses: ./
-
-      - name: Run action with inputs
         uses: ./
         with:
           codeclimate-version: ${{ matrix.version }}
