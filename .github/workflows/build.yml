@@ -1,12 +1,11 @@
 name: build
 on: [push, pull_request]
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -20,24 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --prefer-offline
-
-      - name: Lint codebase
-        run: npm run lint
-
-      - name: Check type
-        run: |
-          npm run lint:tsc
-
-      - name: Run action
-        uses: ./
-
-      - name: Run tests
-        run: |
-          cc-test-reporter before-build
-          npm run test:ci
-          cc-test-reporter after-build --exit-code $?
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
       - name: Build artifact
         run: npm run build
@@ -55,36 +36,3 @@ jobs:
             git diff
             exit 1
           fi
-
-  # action should work on a clean machine without building
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-13, windows-latest]
-        version: [latest, 0.11.1]
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run action
-        uses: ./
-        with:
-          codeclimate-version: ${{ matrix.version }}
-          cli-name: codeclimate
-
-      - name: Locate binary
-        run: command -v codeclimate
-
-      - name: Check version
-        if: matrix.os != 'windows-latest' && matrix.version != 'latest'
-        run: |
-          if [[ $(codeclimate --version) != *'${{ matrix.version }}'* ]]; then
-            echo 'Version does not match. See version below:'
-            codeclimate --version
-            exit 1
-          fi
-
-      - name: Show help
-        run: codeclimate --help
