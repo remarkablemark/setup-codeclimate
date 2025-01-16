@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.10](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.9...v2.0.10) (2025-01-16)
+
+
+### Build System
+
+* **deps:** bump @actions/tool-cache from 2.0.1 to 2.0.2 ([#510](https://github.com/remarkablemark/setup-codeclimate/issues/510)) ([f5c1ead](https://github.com/remarkablemark/setup-codeclimate/commit/f5c1ead3d3786cc9b45aed07411583d45ab8ec4e))
+
 ## [2.0.9](https://github.com/remarkablemark/setup-codeclimate/compare/v2.0.8...v2.0.9) (2024-10-07)
 
 
