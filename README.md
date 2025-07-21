@@ -1,3 +1,13 @@
+> [!WARNING]
+>
+> The Code Climate API has been disabled on **July 18th, 2025**.
+>
+> Any attempts to upload coverage to the Code Climate API (via the `cc-test-reporter`) will result in failed CI builds.
+>
+> To avoid disruption, you must remove (or comment out) any remaining references to the old `cc-test-reporter` within your CI scripts.
+>
+> See the [migration guide](https://docs.qlty.sh/migration/guide).
+
 <p align="center">
   <img src="https://github.com/codeclimate.png?size=200" alt="Code Climate">
 </p>
